@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.prm392.dacare.MainActivity;
 import com.prm392.dacare.R;
+import com.prm392.dacare.utils.SharedPreferencesUtil;
 import com.prm392.dacare.viewmodel.AuthViewModel;
 
 
@@ -25,6 +26,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferencesUtil.init(this);
+
+        if (SharedPreferencesUtil.getAccessToken() != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -50,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("LoginActivity","Login Response Data: " + loginResponse.getMessage());
                 tvResult.setText("Đăng nhập thành công!\nTên: " + loginResponse.getData().getName());
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-
-                // Chuyển sang màn hình chính
+                SharedPreferencesUtil.saveAccessToken(loginResponse.getAccess_token());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
