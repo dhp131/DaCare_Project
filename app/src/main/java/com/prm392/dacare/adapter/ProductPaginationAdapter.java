@@ -41,20 +41,23 @@ public class ProductPaginationAdapter extends PagedListAdapter<Product, ProductP
     }
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtName, txtPrice;
+        private TextView txtName, txtPrice,txtBrand;
         private ImageView imgProduct;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtPrice = itemView.findViewById(R.id.txtPrice);
+            txtBrand = itemView.findViewById(R.id.txtBrand);
             imgProduct = itemView.findViewById(R.id.imgProduct);
         }
 
         @SuppressLint("SetTextI18n")
         public void bind(Product product) {
             txtName.setText(product.getName());
+            txtBrand.setText(product.getBrand());
             txtPrice.setText(product.getPrice()+ "VND");
+
             Picasso.get().load(product.getImage()).into(imgProduct);
         }
     }
