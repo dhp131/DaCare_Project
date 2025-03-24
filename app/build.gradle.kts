@@ -59,5 +59,11 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     //===New dependencies here===
+    implementation(libs.paging.runtime)
+
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+
+    implementation(libs.picasso)
 
 }
