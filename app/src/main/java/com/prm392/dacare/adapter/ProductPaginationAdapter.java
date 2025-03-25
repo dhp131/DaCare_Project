@@ -1,6 +1,7 @@
 package com.prm392.dacare.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.prm392.dacare.R;
 import com.prm392.dacare.model.Product;
+import com.prm392.dacare.ui.home.productdetail.ProductDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -50,6 +52,8 @@ public class ProductPaginationAdapter extends PagedListAdapter<Product, ProductP
             txtPrice = itemView.findViewById(R.id.txtPrice);
             txtBrand = itemView.findViewById(R.id.txtBrand);
             imgProduct = itemView.findViewById(R.id.imgProduct);
+
+
         }
 
         @SuppressLint("SetTextI18n")
@@ -59,6 +63,15 @@ public class ProductPaginationAdapter extends PagedListAdapter<Product, ProductP
             txtPrice.setText(product.getPrice()+ "VND");
 
             Picasso.get().load(product.getImage()).into(imgProduct);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), ProductDetailActivity.class);
+                    intent.putExtra("product_id", product.get_id() );
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

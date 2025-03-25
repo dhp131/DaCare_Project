@@ -33,7 +33,7 @@ public class HomeViewModel extends ViewModel {
                 (new PagedList.Config.Builder())
                         .setEnablePlaceholders(false)
                         .setInitialLoadSizeHint(10)
-                        .setPageSize(20).build();
+                        .setPageSize(10).build();
 
         productLiveData = (new LivePagedListBuilder<>(feedDataFactory, pagedListConfig))
                 .setFetchExecutor(executor)
