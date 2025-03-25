@@ -1,10 +1,15 @@
 package com.prm392.dacare.service;
 
 import com.prm392.dacare.model.Product;
+import com.prm392.dacare.model.QuizQuestion;
 import com.prm392.dacare.model.User;
 import com.prm392.dacare.payload.request.LoginRequest;
+import com.prm392.dacare.payload.request.QuizResultRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
 import com.prm392.dacare.payload.response.PaginationResponse;
+import com.prm392.dacare.payload.response.QuizResultResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,5 +31,9 @@ public interface APIService {
     @GET("product/{id}")
     Call<Product> getProductById(@Path("id") String id);
 
+    @GET("quiz-question")
+    Call<List<QuizQuestion>> getQuizQuestions();
 
+    @POST("skin-types/skin-analysis")
+    Call<QuizResultResponse> skinAnalysis(@Body QuizResultRequest request);
 }
