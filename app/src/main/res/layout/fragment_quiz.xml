@@ -7,38 +7,71 @@
     android:padding="16dp"
     tools:context=".ui.quiz.QuizFragment">
 
-    <!-- Question TextView -->
-    <TextView
-        android:id="@+id/questionTextView"
+    <!-- Question Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/questionCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Options RadioGroup -->
-    <RadioGroup
-        android:id="@+id/optionsRadioGroup"
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:text="What is your skin type?" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Options Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/optionsCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/questionTextView"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/questionCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp">
 
-    <!-- Feedback TextView -->
-    <TextView
-        android:id="@+id/feedbackTextView"
+        <RadioGroup
+            android:id="@+id/optionsRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Feedback Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/feedbackCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/holo_green_dark"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/optionsRadioGroup"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/holo_green_light"
+        app:layout_constraintTop_toBottomOf="@id/optionsCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/feedbackTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            tools:text="Answer recorded. Points: 5" />
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Button Container -->
     <LinearLayout
@@ -47,36 +80,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/feedbackTextView"
+        app:layout_constraintTop_toBottomOf="@id/feedbackCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
         <!-- Previous Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/prevButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:text="Previous"
-            android:layout_marginEnd="8dp" />
+            app:cornerRadius="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
         <!-- Submit Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:text="Submit"
-            android:layout_marginEnd="8dp" />
+            app:cornerRadius="8dp"
+            style="@style/Widget.MaterialComponents.Button" />
 
         <!-- Next Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Next" />
+            android:text="Next"
+            app:cornerRadius="8dp"
+            style="@style/Widget.MaterialComponents.Button" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

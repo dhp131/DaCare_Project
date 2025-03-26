@@ -96,7 +96,7 @@ public class QuizFragment extends Fragment {
                 if (skinType != null) {
                     Log.i(TAG, "Navigating to ResultActivity with SkinType: " + skinType.getType());
                     Intent intent = new Intent(getActivity(), ResultActivity.class);
-                    intent.putExtra("skinType", skinType); // Pass the entire SkinType object
+                    intent.putExtra("skinType", skinType);
                     startActivity(intent);
                 } else {
                     Log.w(TAG, "SkinType is null when quiz finished");
@@ -115,6 +115,10 @@ public class QuizFragment extends Fragment {
             RadioButton selectedRadioButton = view.findViewById(selectedId);
             int selectedIndex = (int) selectedRadioButton.getTag();
             viewModel.selectAnswer(selectedIndex);
+            // Only trigger nextQuestion or skin analysis on the last question after submission
+            if (viewModel.getCurrentQuestionIndex() == viewModel.getTotalQuestions() - 1) {
+                viewModel.nextQuestion(); // This will trigger performSkinAnalysis in ViewModel
+            }
         });
 
         // Handle Next button click
@@ -134,8 +138,14 @@ public class QuizFragment extends Fragment {
     private void updateButtonVisibility() {
         int currentIndex = viewModel.getCurrentQuestionIndex();
         int totalQuestions = viewModel.getTotalQuestions();
+
+        // Previous button: visible if not on first question
         prevButton.setVisibility(currentIndex > 0 ? View.VISIBLE : View.GONE);
-        nextButton.setVisibility(currentIndex < totalQuestions - 1 ? View.VISIBLE : View.VISIBLE);
-        submitButton.setVisibility(View.VISIBLE);
+
+        // Next button: visible if not on last question
+        nextButton.setVisibility(currentIndex < totalQuestions - 1 ? View.VISIBLE : View.GONE);
+
+        // Submit button: visible only on the last question
+        submitButton.setVisibility(currentIndex == totalQuestions - 1 ? View.VISIBLE : View.GONE);
     }
 }

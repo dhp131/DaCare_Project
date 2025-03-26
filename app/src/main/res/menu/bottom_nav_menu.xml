@@ -12,6 +12,11 @@
         android:title="@string/title_routine" />
 
     <item
+        android:id="@+id/navigation_quiz"
+        android:icon="@drawable/ic_quiz_background"
+        android:title="@string/title_quiz" />
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications" />
