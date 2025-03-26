@@ -22,6 +22,7 @@ retrofit = "2.9.0"
 legacySupportV4 = "1.0.0"
 rxandroid = "2.0.2"
 rxjava = "2.1.9"
+activity = "1.10.1"
 
 [libraries]
 appcompat-v7 = { module = "com.android.support:appcompat-v7", version.ref = "appcompatV7" }
@@ -47,6 +48,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

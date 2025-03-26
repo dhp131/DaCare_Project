@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.prm392.dacare.model.Product;
 import com.prm392.dacare.payload.response.LoginResponse;
 import com.prm392.dacare.repository.AuthRepository;
 
