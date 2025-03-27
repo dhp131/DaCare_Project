@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProductPaginationAdapter adapter;
+
+    private ProgressBar progressBar;
     private HomeViewModel viewModel;
     private FragmentHomeBinding binding;
 
@@ -35,6 +39,8 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         recyclerView = root.findViewById(R.id.recyclerView);
+        progressBar = root.findViewById(R.id.loadingIndicator);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         adapter = new ProductPaginationAdapter();
@@ -42,7 +48,13 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         Log.i("TAG", "onCreateView: Home fragment init");
         viewModel.getProductLiveData().observe(getViewLifecycleOwner(), products -> {
-           adapter.submitList(products);
+            if (!products.isEmpty()){
+                progressBar.setVisibility(View.GONE);
+                adapter.submitList(products);
+            } else {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
         });
         adapter.notifyDataSetChanged();
 
