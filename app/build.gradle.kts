@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.prm392.dacare"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.prm392.dacare"
