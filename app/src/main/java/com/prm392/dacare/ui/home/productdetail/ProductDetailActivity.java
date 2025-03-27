@@ -3,6 +3,7 @@ package com.prm392.dacare.ui.home.productdetail;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.prm392.dacare.R;
 import com.prm392.dacare.model.Product;
+import com.prm392.dacare.ui.home.productdetail.addtocart.AddToCartDialog;
 import com.prm392.dacare.viewmodel.ProductDetailViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -77,6 +79,10 @@ public class ProductDetailActivity extends AppCompatActivity {
 //        productExpiredDate = findViewById(R.id.productExpiredDate);
 //        productCreatedAt = findViewById(R.id.productCreatedAt);
         btnBuyNow = findViewById(R.id.btnBuyNow);
+
+        viewModel.getMessage().observe(this, message -> {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -100,8 +106,12 @@ public class ProductDetailActivity extends AppCompatActivity {
 //            productExpiredDate.setText("Expires: " + product.getExpiredDate());
 //            productCreatedAt.setText("Created: " + product.getCreatedAt());
 
-            btnBuyNow.setOnClickListener(v -> {
-                Toast.makeText(this, "Buying " + product.getName(), Toast.LENGTH_SHORT).show();
+            btnBuyNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AddToCartDialog bottomSheet = new AddToCartDialog();
+                    bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
+                }
             });
         }
     }
