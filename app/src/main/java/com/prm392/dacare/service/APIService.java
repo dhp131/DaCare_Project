@@ -3,6 +3,7 @@ package com.prm392.dacare.service;
 import com.prm392.dacare.model.Product;
 import com.prm392.dacare.model.QuizQuestion;
 import com.prm392.dacare.model.User;
+import com.prm392.dacare.payload.request.AddToCartRequest;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.request.QuizResultRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
@@ -36,4 +37,9 @@ public interface APIService {
 
     @POST("skin-types/skin-analysis")
     Call<QuizResultResponse> skinAnalysis(@Body QuizResultRequest request);
+
+
+    //Cart
+    @POST("cart/addToCart")
+    Call<Void> addToCart(@Body AddToCartRequest addToCartRequest);
 }
