@@ -59,7 +59,7 @@ public class UserFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferencesUtil.clearAccessToken();
+                SharedPreferencesUtil.clear();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 getActivity().finish();
                 startActivity(intent);

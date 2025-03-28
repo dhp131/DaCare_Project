@@ -8,16 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Routine {
     private String _id;
     private String routineName;
     private String routineDescription;
-    private SkinType skinType;
     private List<Step> steps;
-    private String createdAt;
-    private String updatedAt;
-    private boolean active;
+
 }

@@ -4,6 +4,9 @@ import com.prm392.dacare.model.Product;
 import com.prm392.dacare.model.QuizQuestion;
 import com.prm392.dacare.model.User;
 import com.prm392.dacare.payload.request.AddToCartRequest;
+import com.prm392.dacare.model.Routine;
+import com.prm392.dacare.payload.request.RoutineRequest;
+import com.prm392.dacare.payload.response.RoutineResponse;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.request.QuizResultRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
@@ -46,6 +49,10 @@ public interface APIService {
 
     @POST("skin-types/skin-analysis")
     Call<QuizResultResponse> skinAnalysis(@Body QuizResultRequest request);
+
+    @GET("routine/getRoutineBySkinType/{skinTypeId}")
+    Call<Routine> getRoutineBySkinType(@Path("skinTypeId") String skinTypeId);
+
 
 
     //Cart

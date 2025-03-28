@@ -12,16 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_routine"
-        android:name="com.prm392.dacare.ui.quiz.QuizFragment"
-        android:label="@string/title_routine"
-        tools:layout="@layout/fragment_quiz" />
-
-    <fragment
         android:id="@+id/navigation_quiz"
         android:name="com.prm392.dacare.ui.quiz.QuizFragment"
         android:label="@string/title_quiz"
         tools:layout="@layout/fragment_quiz" />
+
+    <fragment
+        android:id="@+id/navigation_routine"
+        android:name="com.prm392.dacare.ui.routine.RoutineFragment"
+        android:label="Routine"
+        tools:layout="@layout/fragment_routine" />
 
     <fragment
         android:id="@+id/navigation_notifications"

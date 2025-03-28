@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.prm392.dacare.MainActivity;
 import com.prm392.dacare.R;
 import com.prm392.dacare.model.SkinType;
+import com.prm392.dacare.ui.routine.RoutineFragment;
+import com.prm392.dacare.utils.SharedPreferencesUtil;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -32,19 +34,27 @@ public class ResultActivity extends AppCompatActivity {
         SkinType skinType = (SkinType) getIntent().getSerializableExtra("skinType");
         if (skinType != null) {
             Log.i(TAG, "SkinType received: " + skinType.getType());
+            SharedPreferencesUtil.put("SkinType", skinType.getId());
             resultTextView.setText("Your skin type: " + skinType.getType() + "\n\n" +
                     "Description: " + skinType.getDescription() + "\n\n" +
                     "Treatment: " + skinType.getTreatment());
+
         } else {
             Log.w(TAG, "No SkinType received in Intent");
             resultTextView.setText("No skin type data available.");
         }
 
-        // Handle back button click to return to RoutineFragment
+        // Handle back button click to go directly to RoutineFragment
         backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("navigateToRoutine", true);
-            startActivity(intent);
+            RoutineFragment routineFragment = new RoutineFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("skinType", skinType);
+            routineFragment.setArguments(bundle);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, routineFragment)
+                    .addToBackStack(null)
+                    .commit();
             finish();
         });
     }
