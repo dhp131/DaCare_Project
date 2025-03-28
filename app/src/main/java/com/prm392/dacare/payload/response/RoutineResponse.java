@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoutineResponse {
-    private List<Routine> routines;  // List chứa các routine
+    private Routine routines;  // List chứa các routine
 
 }

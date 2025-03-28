@@ -2,6 +2,7 @@ package com.prm392.dacare.service;
 
 import com.prm392.dacare.model.Product;
 import com.prm392.dacare.model.QuizQuestion;
+import com.prm392.dacare.model.Routine;
 import com.prm392.dacare.payload.request.RoutineRequest;
 import com.prm392.dacare.payload.response.RoutineResponse;
 import com.prm392.dacare.payload.request.LoginRequest;
@@ -47,8 +48,8 @@ public interface APIService {
     @POST("skin-types/skin-analysis")
     Call<QuizResultResponse> skinAnalysis(@Body QuizResultRequest request);
 
-    @GET("api/routine/getRoutineBySkinType/{skinTypeId}")
-    Call<RoutineResponse> getRoutineBySkinType(@Path("skinTypeId") String skinTypeId);
+    @GET("routine/getRoutineBySkinType/{skinTypeId}")
+    Call<Routine> getRoutineBySkinType(@Path("skinTypeId") String skinTypeId);
 
     @GET("order/getOrderById/{id}")
     Call<OrderDetailResponse> getOrderById(@Path("id") String id);

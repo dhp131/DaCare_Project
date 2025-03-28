@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.prm392.dacare.model.Routine;
 import com.prm392.dacare.payload.response.RoutineResponse;
 import com.prm392.dacare.repository.RoutineRepository;
 
@@ -14,7 +15,7 @@ import retrofit2.Response;
 public class RoutineViewModel extends ViewModel {
 
     private RoutineRepository routineRepository;
-    private MutableLiveData<RoutineResponse> routineLiveData;
+    private MutableLiveData<Routine> routineLiveData;
     private MutableLiveData<String> errorLiveData;
 
     public RoutineViewModel() {
@@ -25,9 +26,9 @@ public class RoutineViewModel extends ViewModel {
 
     // Phương thức lấy routine từ Repository
     public void getRoutineBySkinType(String skinTypeId) {
-        routineRepository.getRoutineBySkinType(skinTypeId, new Callback<RoutineResponse>() {
+        routineRepository.getRoutineBySkinType(skinTypeId, new Callback<Routine>() {
             @Override
-            public void onResponse(Call<RoutineResponse> call, Response<RoutineResponse> response) {
+            public void onResponse(Call<Routine> call, Response<Routine> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         routineLiveData.setValue(response.body());
@@ -40,14 +41,14 @@ public class RoutineViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<RoutineResponse> call, Throwable t) {
+            public void onFailure(Call<Routine> call, Throwable t) {
                 errorLiveData.setValue("Failed to load routine: " + t.getMessage());
             }
         });
     }
 
     // Getter cho routineLiveData và errorLiveData
-    public LiveData<RoutineResponse> getRoutineLiveData() {
+    public LiveData<Routine> getRoutineLiveData() {
         return routineLiveData;
     }
 

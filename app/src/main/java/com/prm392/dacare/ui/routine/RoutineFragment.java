@@ -19,6 +19,7 @@ import com.prm392.dacare.adapter.StepAdapter;
 import com.prm392.dacare.model.Routine;
 import com.prm392.dacare.model.SkinType;
 import com.prm392.dacare.model.Step;
+import com.prm392.dacare.utils.SharedPreferencesUtil;
 
 import java.util.List;
 
@@ -41,23 +42,23 @@ public class RoutineFragment extends Fragment {
 
         routineViewModel = new ViewModelProvider(this).get(RoutineViewModel.class);
 
-        SkinType skinType = null;
-        if (getArguments() != null) {
-            skinType = (SkinType) getArguments().getSerializable("skinType");
-        }
+//        SkinType skinType = null;
+//        if (getArguments() != null) {
+//            skinType = (SkinType) getArguments().getSerializable("skinType");
+//        }
+        String skinTypeId = SharedPreferencesUtil.get("SkinType");
 
-        if (skinType != null && skinType.getId() != null) {
-            tvTitle.setText("Loại da của bạn là: " + skinType.getType());
-            routineViewModel.getRoutineBySkinType(skinType.getId());
+        if (!skinTypeId.isEmpty()) {
+            //tvTitle.setText("Loại da của bạn là: " + skinType.getType());
+            routineViewModel.getRoutineBySkinType(skinTypeId);
         } else {
             tvTitle.setText("Không có thông tin loại da.");
             Toast.makeText(getContext(), "Chưa có thông tin loại da, không thể lấy routine.", Toast.LENGTH_LONG).show();
         }
 
         routineViewModel.getRoutineLiveData().observe(getViewLifecycleOwner(), routineResponse -> {
-            if (routineResponse != null && routineResponse.getRoutines() != null && !routineResponse.getRoutines().isEmpty()) {
-                Routine routine = routineResponse.getRoutines().get(0);
-                List<Step> steps = routine.getSteps();
+            if (routineResponse != null) {
+                List<Step> steps = routineResponse.getSteps();
                 if (stepAdapter == null) {
                     stepAdapter = new StepAdapter(steps);
                     rvStepList.setAdapter(stepAdapter);
