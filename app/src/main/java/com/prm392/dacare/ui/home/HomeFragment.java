@@ -62,12 +62,16 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
         Log.i("TAG", "onCreateView: Home fragment init");
+        Runnable fetchRunnable = () -> {
+
+        };
         viewModel.getProductLiveData().observe(getViewLifecycleOwner(), products -> {
             if (!products.isEmpty()){
                 progressBar.setVisibility(View.GONE);
                 adapter.submitList(products);
             } else {
                 progressBar.setVisibility(View.VISIBLE);
+                viewModel.retryFetchWithDebounce();
             }
 
         });
