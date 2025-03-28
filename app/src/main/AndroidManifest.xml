@@ -15,11 +15,14 @@
         android:theme="@style/Theme.DaCare"
         tools:targetApi="31">
         <activity
+            android:name=".ui.orderDetail.OrderDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.order.ListOrderActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true">

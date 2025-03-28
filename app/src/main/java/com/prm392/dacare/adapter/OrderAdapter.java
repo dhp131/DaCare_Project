@@ -1,5 +1,7 @@
 package com.prm392.dacare.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.prm392.dacare.R;
 import com.prm392.dacare.model.Order;
+import com.prm392.dacare.ui.orderDetail.OrderDetailActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -27,16 +30,31 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the card layout (item_order.xml)
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new OrderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Order order = orderList.get(position);
-        holder.bind(order);
+        try {
+            Order order = orderList.get(position);
+            holder.bind(order);
+            holder.itemView.setOnClickListener(v -> {
+                try {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, OrderDetailActivity.class);
+                    intent.putExtra("ORDER_ID", order.get_id());
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    throw new RuntimeException("Error starting OrderDetailActivity for order: " + order.get_id(), e);
+                }
+            });
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error binding order at position " + position, e);
+        }
     }
+
 
     @Override
     public int getItemCount() {

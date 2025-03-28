@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderContainer {
+public class OrdersContainer {
         private boolean ok;
         private int status;
         private String message;

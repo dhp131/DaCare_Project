@@ -3,6 +3,7 @@ package com.prm392.dacare.service;
 import com.prm392.dacare.model.Product;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
+import com.prm392.dacare.payload.response.OrderDetail.OrderDetailResponse;
 import com.prm392.dacare.payload.response.OrderResponse.OrderResponse;
 import com.prm392.dacare.payload.response.PaginationResponse;
 import com.prm392.dacare.payload.response.UserResponse;
@@ -33,4 +34,7 @@ public interface APIService {
 
     @GET("order/getOrderByStatus")
     Call<OrderResponse> getOrder();
+
+    @GET("order/getOrderById")
+    Call<OrderDetailResponse> getOrderById(@Path("id") String id);
 }
