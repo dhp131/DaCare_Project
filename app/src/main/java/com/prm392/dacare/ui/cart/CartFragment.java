@@ -1,9 +1,11 @@
 package com.prm392.dacare.ui.cart;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,11 +28,13 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         Log.d("CartFragment", "Fragment created. Fetching cart...");
-        cartAdapter = new CartAdapter();
-        recyclerView.setAdapter(cartAdapter);
 
         cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        cartAdapter = new CartAdapter(cartViewModel);
+        recyclerView.setAdapter(cartAdapter);
+
         cartViewModel.getCartLiveData().observe(getViewLifecycleOwner(), cart -> {
             if (cart != null && cart.getProducts() != null) {
                 Log.d("CartFragment", "Cart items count: " + cart.getProducts().size());
@@ -42,6 +46,7 @@ public class CartFragment extends Fragment {
                 Log.d("CartFragment", "Cart is null or empty");
             }
         });
+
         Log.d("CartFragment", "CartFragment Loaded!");
         return view;
     }

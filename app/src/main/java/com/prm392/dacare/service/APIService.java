@@ -7,6 +7,7 @@ import com.prm392.dacare.model.User;
 import com.prm392.dacare.payload.request.AddToCartRequest;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.request.QuizResultRequest;
+import com.prm392.dacare.payload.request.UpdateQuantityRequest;
 import com.prm392.dacare.payload.response.AddToCartResponse;
 import com.prm392.dacare.payload.response.GetCartResponse;
 import com.prm392.dacare.payload.response.LoginResponse;
@@ -19,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -46,4 +48,6 @@ public interface APIService {
     Call<GetCartResponse> getCartInformation();
     @POST("cart/addToCart")
     Call<AddToCartResponse> AddToCart(@Body AddToCartRequest request);
+    @PUT("cart/updateQuantity")
+    Call<Cart> UpdateQuantity(@Body UpdateQuantityRequest request);
 }

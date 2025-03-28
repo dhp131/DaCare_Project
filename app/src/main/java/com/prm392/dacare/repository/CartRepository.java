@@ -5,6 +5,7 @@ import android.util.Log;
 import com.prm392.dacare.model.Cart;
 import com.prm392.dacare.model.QuizQuestion;
 import com.prm392.dacare.payload.request.AddToCartRequest;
+import com.prm392.dacare.payload.request.UpdateQuantityRequest;
 import com.prm392.dacare.payload.response.AddToCartResponse;
 import com.prm392.dacare.payload.response.GetCartResponse;
 import com.prm392.dacare.service.APIClient;
@@ -53,6 +54,12 @@ public class CartRepository {
         Log.i("CartRepository", "Adding item to cart...");
         apiService.AddToCart(request).enqueue(callback);
     }
+
+    public void UpdateQuantity (UpdateQuantityRequest request,Callback<Cart> callback ){
+        Log.i("CartRepository", "Update item in cart...");
+        apiService.UpdateQuantity(request).enqueue(callback);
+    }
+
 
 
 
