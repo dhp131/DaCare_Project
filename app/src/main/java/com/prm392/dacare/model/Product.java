@@ -41,6 +41,39 @@ public class Product implements Parcelable {
     private String expiredDate;
     private boolean active;
 
+    protected Product(Parcel in) {
+        _id = in.readString();
+        image = in.readString();
+        name = in.readString();
+        brand = in.readString();
+        description = in.readString();
+        ingredients = in.readString();
+        usage = in.readString();
+        price = in.readInt();
+        productDiscount = in.readInt();
+        usageTime = in.readString();
+        origin = in.readString();
+        volume = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        priority = in.readByte() != 0;
+        rating = in.readDouble();
+        expiredDate = in.readString();
+        active = in.readByte() != 0;
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
     @Override
     public int describeContents() {
         return 0;
@@ -48,7 +81,24 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-
+        dest.writeString(_id);
+        dest.writeString(image);
+        dest.writeString(name);
+        dest.writeString(brand);
+        dest.writeString(description);
+        dest.writeString(ingredients);
+        dest.writeString(usage);
+        dest.writeInt(price);
+        dest.writeInt(productDiscount);
+        dest.writeString(usageTime);
+        dest.writeString(origin);
+        dest.writeString(volume);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeByte((byte) (priority ? 1 : 0));
+        dest.writeDouble(rating);
+        dest.writeString(expiredDate);
+        dest.writeByte((byte) (active ? 1 : 0));
     }
 
     public static DiffUtil.ItemCallback<Product> DIFF_CALLBACK = new DiffUtil.ItemCallback<Product>() {
