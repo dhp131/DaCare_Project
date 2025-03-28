@@ -33,8 +33,7 @@
             android:id="@+id/rvProductList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal" />  <!-- Chỉ định lướt ngang -->
+            android:orientation="horizontal" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

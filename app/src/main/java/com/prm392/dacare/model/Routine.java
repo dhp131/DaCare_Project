@@ -8,16 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Routine {
-    private String _id;
+    private String id;
     private String routineName;
     private String routineDescription;
-    private SkinType skinType;
-    private List<Step> steps;
-    private String createdAt;
-    private String updatedAt;
-    private boolean active;
+    private List<Step> steps;  // Đây là danh sách các bước trong routine
+
+    public List<Step> getSteps() {return steps;}
+
 }
