@@ -5,6 +5,7 @@ import com.prm392.dacare.model.Product;
 import com.prm392.dacare.model.QuizQuestion;
 import com.prm392.dacare.model.User;
 import com.prm392.dacare.payload.request.AddToCartRequest;
+import com.prm392.dacare.payload.request.CreateOrderRequest;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.request.QuizResultRequest;
 import com.prm392.dacare.payload.request.UpdateQuantityRequest;
@@ -50,4 +51,8 @@ public interface APIService {
     Call<AddToCartResponse> AddToCart(@Body AddToCartRequest request);
     @PUT("cart/updateQuantity")
     Call<Cart> UpdateQuantity(@Body UpdateQuantityRequest request);
+
+    //Order
+    @POST("order/createOrder")
+    Call<Void> CreateOrder (@Body CreateOrderRequest request);
 }

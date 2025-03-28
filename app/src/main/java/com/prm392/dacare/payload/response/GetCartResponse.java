@@ -19,5 +19,4 @@ public class GetCartResponse {
     private String ok;
     private Cart data;
     private Double totalPrice;
-
 }

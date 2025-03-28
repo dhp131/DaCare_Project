@@ -5,6 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +24,18 @@ import com.prm392.dacare.viewmodel.CartViewModel;
 public class CartFragment extends Fragment {
     private CartViewModel cartViewModel;
     private CartAdapter cartAdapter;
+    private TextView textViewTotalPrice;
+    private Button buttonOrder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCart);
+        textViewTotalPrice = view.findViewById(R.id.textViewTotalPrice);
+        buttonOrder = view.findViewById(R.id.buttonOrder);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Log.d("CartFragment", "Fragment created. Fetching cart...");
@@ -42,9 +51,20 @@ public class CartFragment extends Fragment {
                     Log.d("CartFragment", "Item: " + item.getName() + ", Price: " + item.getPrice() + ", Quantity: " + item.getQuantity());
                 }
                 cartAdapter.setCartItems(cart.getProducts());
+                // Update total price from Cart object
+                double totalPrice = cart.getTotalPrice();
+                textViewTotalPrice.setText(String.format("Total: $%.2f", totalPrice));
             } else {
                 Log.d("CartFragment", "Cart is null or empty");
+                textViewTotalPrice.setText("Total: $0.00");
             }
+        });
+
+        buttonOrder.setOnClickListener(v -> {
+            Log.d("CartFragment", "Order button clicked");
+            cartViewModel.createOrder();
+            Toast.makeText(getContext(), "Order placed!", Toast.LENGTH_SHORT).show();
+            // Optionally navigate to another screen or clear the UI
         });
 
         Log.d("CartFragment", "CartFragment Loaded!");
