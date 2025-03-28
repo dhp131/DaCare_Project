@@ -5,6 +5,7 @@ import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
 import com.prm392.dacare.payload.response.OrderResponse.OrderResponse;
 import com.prm392.dacare.payload.response.PaginationResponse;
+import com.prm392.dacare.payload.response.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,6 +19,10 @@ public interface APIService {
     //Auth
     @POST("auth/login")
     Call<LoginResponse> login(@Body LoginRequest request);
+
+
+    @GET("auth/getUserById")
+    Call<UserResponse> getUser();
 
     //Product
     @GET("product")
