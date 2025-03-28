@@ -60,8 +60,9 @@ public class LoginActivity extends AppCompatActivity {
                 tvResult.setText("Đăng nhập thành công!\nTên: " + loginResponse.getData().getName());
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 SharedPreferencesUtil.saveAccessToken(loginResponse.getAccess_token());
-                if (!loginResponse.getData().getSkinType().isEmpty()){
-                    SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType());
+                if (loginResponse.getData().getSkinType() != null){
+                    SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType().getType());
+                    SharedPreferencesUtil.put("SkinTypeName", loginResponse.getData().getSkinType().getType());
                 }
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

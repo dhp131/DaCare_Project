@@ -20,7 +20,7 @@ public class User {
     private String email;
     private String avatar;
     private List<String> role;
-    private String skinType;
+    private SkinType skinType;
     private String createdAt;
     private String updatedAt;
 }
