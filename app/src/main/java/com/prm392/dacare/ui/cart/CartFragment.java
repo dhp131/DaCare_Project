@@ -70,4 +70,10 @@ public class CartFragment extends Fragment {
         Log.d("CartFragment", "CartFragment Loaded!");
         return view;
     }
+    public void refreshCart() {
+        if (cartViewModel != null) {
+            Log.d("CartFragment", "Refreshing cart...");
+            cartViewModel.fetchCartInformation();
+        }
+    }
 }
