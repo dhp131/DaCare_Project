@@ -18,8 +18,14 @@
             android:name=".ui.home.productdetail.ProductDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.orderDetail.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.order.ListOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true">

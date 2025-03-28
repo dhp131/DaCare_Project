@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderExtend {
     private String _id;
-    private String customerId;
+    private User customerId;
     private int amount;
     private String status;
     private List<Product> products;
