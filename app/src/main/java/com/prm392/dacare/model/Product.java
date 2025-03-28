@@ -33,7 +33,7 @@ public class Product implements Parcelable {
     private String usageTime;
     private String origin;
     private String volume;
-    private int inventory;
+    private int quantity;
     private String createdAt;
     private String updatedAt;
     private boolean priority;
