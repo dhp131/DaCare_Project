@@ -53,7 +53,7 @@ public class ProductInOrderAdapter extends RecyclerView.Adapter<ProductInOrderAd
         // Set product name
         holder.tvProductName.setText(product.getName());
 
-        // Set product price (formatting VND)
+        double finalProductPrice = product.getPrice();
         String priceText = "Price: " + String.format("%,d", product.getPrice()) + " VND";
         holder.tvProductPrice.setText(priceText);
 

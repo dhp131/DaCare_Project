@@ -110,7 +110,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 txtCancelReason.setVisibility(View.GONE);
             }
 
-            // Optionally, load an image for the customer into imgCustomer using a library (Picasso/Glide)
         }
     }
 

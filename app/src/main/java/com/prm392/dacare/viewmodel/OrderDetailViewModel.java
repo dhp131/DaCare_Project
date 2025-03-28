@@ -32,20 +32,29 @@ public class OrderDetailViewModel extends ViewModel {
      * @param id The ID of the order.
      */
     public void loadOrderDetail(String id) {
-        orderRepository.getOrderDetail(id, new Callback<OrderDetailResponse>() {
-            @Override
-            public void onResponse(Call<OrderDetailResponse> call, Response<OrderDetailResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    orderDetail.postValue(response.body().getOrder().getOrder());
-                } else {
-                    Log.e("OrderDetailViewModel", "Failed to load order detail: " + response.message());
+        try {
+            orderRepository.getOrderDetail(id, new Callback<OrderDetailResponse>() {
+                @Override
+                public void onResponse(Call<OrderDetailResponse> call, Response<OrderDetailResponse> response) {
+                    try {
+                        if (response.isSuccessful() && response.body() != null) {
+                            orderDetail.postValue(response.body().getOrder().getOrder());
+                        } else {
+                            Log.e("OrderDetailViewModel", "Failed to load order detail: " + response.message());
+                        }
+                    } catch (Exception e) {
+                        Log.e("OrderDetailViewModel", "Error processing order detail response", e);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<OrderDetailResponse> call, Throwable t) {
-                Log.e("OrderDetailViewModel", "Failed to load order detail", t);
-            }
-        });
+                @Override
+                public void onFailure(Call<OrderDetailResponse> call, Throwable t) {
+                    Log.e("OrderDetailViewModel", "Failed to load order detail", t);
+                }
+            });
+        } catch (Exception e) {
+            Log.e("OrderDetailViewModel", "Error calling getOrderDetail", e);
+        }
     }
+
 }

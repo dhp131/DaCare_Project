@@ -35,6 +35,6 @@ public interface APIService {
     @GET("order/getOrderByStatus")
     Call<OrderResponse> getOrder();
 
-    @GET("order/getOrderById")
+    @GET("order/getOrderById/{id}")
     Call<OrderDetailResponse> getOrderById(@Path("id") String id);
 }
