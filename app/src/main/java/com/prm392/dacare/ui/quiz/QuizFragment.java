@@ -35,32 +35,59 @@ public class QuizFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
-        // Initialize UI components
+        // Set up the UI and logic
+        initializeUIComponents(view);
+        initializeViewModel();
+        observeViewModel();
+        setButtonClickListeners();
+
+        return view;
+    }
+
+    /** Initializes all UI components from the layout */
+    private void initializeUIComponents(View view) {
         questionTextView = view.findViewById(R.id.questionTextView);
         optionsRadioGroup = view.findViewById(R.id.optionsRadioGroup);
         prevButton = view.findViewById(R.id.prevButton);
         nextButton = view.findViewById(R.id.nextButton);
         submitButton = view.findViewById(R.id.submitButton);
         feedbackTextView = view.findViewById(R.id.feedbackTextView);
+    }
 
-        // Initialize ViewModel
+    /** Sets up the ViewModel for the fragment */
+    private void initializeViewModel() {
         viewModel = new ViewModelProvider(this).get(QuizViewModel.class);
+    }
 
-        // Observe loading state
+    /** Observes all LiveData from the ViewModel */
+    private void observeViewModel() {
+        observeLoadingState();
+        observeErrorMessages();
+        observeCurrentQuestion();
+        observeFeedback();
+        observeQuizCompletion();
+    }
+
+    /** Shows a loading message when questions are being fetched */
+    private void observeLoadingState() {
         viewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading) {
                 Toast.makeText(getContext(), "Loading questions...", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        // Observe error messages
+    /** Displays error messages if they occur */
+    private void observeErrorMessages() {
         viewModel.getErrorMessage().observe(getViewLifecycleOwner(), error -> {
             if (error != null) {
                 Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
             }
         });
+    }
 
-        // Observe current question
+    /** Updates the UI with the current question and answer options */
+    private void observeCurrentQuestion() {
         viewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), question -> {
             if (question != null) {
                 questionTextView.setText(question.getTitle());
@@ -78,8 +105,10 @@ public class QuizFragment extends Fragment {
                 updateButtonVisibility();
             }
         });
+    }
 
-        // Observe feedback
+    /** Shows or hides feedback based on ViewModel data */
+    private void observeFeedback() {
         viewModel.getFeedback().observe(getViewLifecycleOwner(), feedback -> {
             if (feedback != null) {
                 feedbackTextView.setText(feedback);
@@ -88,8 +117,10 @@ public class QuizFragment extends Fragment {
                 feedbackTextView.setVisibility(View.GONE);
             }
         });
+    }
 
-        // Observe quiz completion and navigate to ResultActivity with skinType
+    /** Navigates to ResultActivity when the quiz is finished */
+    private void observeQuizCompletion() {
         viewModel.getIsQuizFinished().observe(getViewLifecycleOwner(), isFinished -> {
             if (isFinished) {
                 SkinType skinType = viewModel.getSkinType().getValue();
@@ -104,48 +135,50 @@ public class QuizFragment extends Fragment {
                 }
             }
         });
-
-        // Handle Submit button click
-        submitButton.setOnClickListener(v -> {
-            int selectedId = optionsRadioGroup.getCheckedRadioButtonId();
-            if (selectedId == -1) {
-                Toast.makeText(getContext(), "Please select an option", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            RadioButton selectedRadioButton = view.findViewById(selectedId);
-            int selectedIndex = (int) selectedRadioButton.getTag();
-            viewModel.selectAnswer(selectedIndex);
-            // Only trigger nextQuestion or skin analysis on the last question after submission
-            if (viewModel.getCurrentQuestionIndex() == viewModel.getTotalQuestions() - 1) {
-                viewModel.nextQuestion(); // This will trigger performSkinAnalysis in ViewModel
-            }
-        });
-
-        // Handle Next button click
-        nextButton.setOnClickListener(v -> {
-            viewModel.nextQuestion();
-        });
-
-        // Handle Previous button click
-        prevButton.setOnClickListener(v -> {
-            viewModel.previousQuestion();
-        });
-
-        return view;
     }
 
-    // Update button visibility based on current question index
+    /** Sets up click listeners for all buttons */
+    private void setButtonClickListeners() {
+        submitButton.setOnClickListener(v -> handleSubmitButtonClick());
+        nextButton.setOnClickListener(v -> handleNextButtonClick());
+        prevButton.setOnClickListener(v -> viewModel.previousQuestion());
+    }
+
+    /** Handles submission of the selected answer */
+    private void handleSubmitButtonClick() {
+        int checkedId = optionsRadioGroup.getCheckedRadioButtonId();
+        if (checkedId == -1) {
+            Toast.makeText(getContext(), "Please select an option", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        RadioButton selectedRadioButton = optionsRadioGroup.findViewById(checkedId);
+        int selectedIndex = (int) selectedRadioButton.getTag();
+        viewModel.selectAnswer(selectedIndex);
+        if (viewModel.getCurrentQuestionIndex() == viewModel.getTotalQuestions() - 1) {
+            viewModel.nextQuestion(); // Triggers skin analysis in ViewModel
+        }
+    }
+
+    /** Handles moving to the next question after selection */
+    private void handleNextButtonClick() {
+        int checkedId = optionsRadioGroup.getCheckedRadioButtonId();
+        if (checkedId == -1) {
+            Toast.makeText(getContext(), "Please select an option", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        RadioButton selectedRadioButton = optionsRadioGroup.findViewById(checkedId);
+        int selectedIndex = (int) selectedRadioButton.getTag();
+        viewModel.selectAnswer(selectedIndex);
+        viewModel.nextQuestion();
+    }
+
+    /** Updates visibility of navigation buttons based on question index */
     private void updateButtonVisibility() {
         int currentIndex = viewModel.getCurrentQuestionIndex();
         int totalQuestions = viewModel.getTotalQuestions();
 
-        // Previous button: visible if not on first question
         prevButton.setVisibility(currentIndex > 0 ? View.VISIBLE : View.GONE);
-
-        // Next button: visible if not on last question
         nextButton.setVisibility(currentIndex < totalQuestions - 1 ? View.VISIBLE : View.GONE);
-
-        // Submit button: visible only on the last question
         submitButton.setVisibility(currentIndex == totalQuestions - 1 ? View.VISIBLE : View.GONE);
     }
 }

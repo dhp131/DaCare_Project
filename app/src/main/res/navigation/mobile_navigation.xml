@@ -14,8 +14,7 @@
     <fragment
         android:id="@+id/navigation_routine"
         android:name="com.prm392.dacare.ui.quiz.QuizFragment"
-        android:label="@string/title_routine"
-        tools:layout="@layout/fragment_quiz" />
+        android:label="@string/title_routine"/>
 
     <fragment
         android:id="@+id/navigation_quiz"
