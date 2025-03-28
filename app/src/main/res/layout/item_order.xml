@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    app:strokeColor="#DDDDDD"
+    app:strokeWidth="1dp"
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
-        <!-- Header: Order ID & Date -->
+        <!-- Order ID & Date -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +32,7 @@
                 android:text="Order #123456"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#333333"/>
+                android:textColor="#37474F"/>
 
             <TextView
                 android:id="@+id/txtOrderDate"
@@ -38,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="25 Mar 2024"
                 android:textSize="14sp"
-                android:textColor="#666666"
-                android:gravity="end"/>
+                android:textColor="#757575"/>
         </LinearLayout>
 
         <!-- Divider -->
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="8dp"
-            android:background="#e0e0e0"/>
+            android:background="#EEEEEE"/>
 
         <!-- Customer Info -->
         <LinearLayout
@@ -57,13 +58,11 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="8dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgCustomer"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_user"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circle_background"
+                app:srcCompat="@drawable/ic_user"
                 android:contentDescription="Customer Avatar"
                 android:layout_marginEnd="12dp"/>
 
@@ -73,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="John Doe"
                 android:textSize="16sp"
-                android:textColor="#333333"
+                android:textColor="#37474F"
                 android:textStyle="bold"/>
         </LinearLayout>
 
@@ -81,7 +80,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#e0e0e0"
+            android:background="#EEEEEE"
             android:layout_marginVertical="8dp"/>
 
         <!-- Status & Amount -->
@@ -99,7 +98,7 @@
                 android:layout_weight="1"
                 android:text="Completed"
                 android:textSize="16sp"
-                android:textColor="#388E3C"
+                android:textColor="#2E7D32"
                 android:textStyle="bold"/>
 
             <TextView
@@ -108,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="250.000 VND"
                 android:textSize="18sp"
-                android:textColor="#1976D2"
+                android:textColor="#0D47A1"
                 android:textStyle="bold"
                 android:gravity="end"/>
         </LinearLayout>
@@ -120,7 +119,7 @@
             android:layout_height="wrap_content"
             android:text="Paid"
             android:textSize="16sp"
-            android:textColor="#388E3C"
+            android:textColor="#2E7D32"
             android:textStyle="bold"/>
 
         <!-- Cancel Reason (visible only when applicable) -->
@@ -134,4 +133,4 @@
             android:visibility="gone"
             android:layout_marginTop="8dp"/>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

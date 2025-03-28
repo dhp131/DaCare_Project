@@ -59,7 +59,7 @@ public class ProductInOrderAdapter extends RecyclerView.Adapter<ProductInOrderAd
 
         // Hide quantity and discount since they're not in Product class
         holder.tvProductQuantity.setText(product.getQuantity() + " pcs");
-        holder.tvProductDiscount.setText(product.getProductDiscount() + "%");
+        holder.tvProductDiscount.setText("Discount " + product.getProductDiscount() + "%");
 
         // Load product image using Picasso
         if (product.getImage() != null && !product.getImage().isEmpty()) {

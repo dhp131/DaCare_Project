@@ -76,17 +76,17 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void setupOrderDetails(OrderExtend order) {
         // Set order basic information
-        tvOrderId.setText("Order #" + order.get_id());
+        tvOrderId.setText("#" + order.get_id());
         tvOrderDate.setText(new SimpleDateFormat("dd MMM yyyy").format(order.getOrderDate()));
         tvOrderStatus.setText("Status: " + order.getStatus());
-        tvOrderAmount.setText("Total: " + String.format("%,d", order.getAmount()) + " VND");
+        tvOrderAmount.setText("\uD83D\uDCB0 Total: " + String.format("%,d", order.getAmount()) + " VND");
         tvOrderPaid.setText("Payment: " + (order.isPaid() ? "Paid" : "Unpaid"));
 
         // Set customer information
         if (order.getCustomerId() != null) {
             tvCustomerName.setText(order.getCustomerId().getName());
-            tvCustomerPhone.setText("Phone: " + order.getCustomerId().getPhone());
-            tvCustomerEmail.setText("Email: " + order.getCustomerId().getEmail());
+            tvCustomerPhone.setText("\uD83D\uDCDE Phone: " + order.getCustomerId().getPhone());
+            tvCustomerEmail.setText("✉\uFE0F Email: " + order.getCustomerId().getEmail());
         }
 
         // Handle cancellation reason
