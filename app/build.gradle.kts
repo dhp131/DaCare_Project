@@ -66,5 +66,7 @@ dependencies {
     implementation(libs.rxandroid)
 
     implementation(libs.picasso)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
 }

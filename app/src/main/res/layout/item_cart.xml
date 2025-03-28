@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageViewCartItem"
+        android:layout_width="88dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/textViewCartItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imageViewCartItem"
+        android:text="Product Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textViewCartItemPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imageViewCartItem"
+        android:text="$20.00"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+    <Button
+        android:id="@+id/buttonMinus"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:text="-"
+        tools:layout_editor_absoluteX="291dp"
+        tools:layout_editor_absoluteY="68dp" />
+
+    <TextView
+        android:id="@+id/textViewCartItemQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="331dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+    <Button
+        android:id="@+id/buttonPlus"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:text="+"
+        tools:layout_editor_absoluteX="353dp"
+        tools:layout_editor_absoluteY="68dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
