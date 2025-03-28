@@ -61,8 +61,13 @@ public class RoutineFragment extends Fragment {
             if (routineResponse != null) {
                 List<Step> steps = routineResponse.getSteps();
                 if (stepAdapter == null) {
-                    stepAdapter = new StepAdapter(steps);
-                    rvStepList.setAdapter(stepAdapter);
+                    if (steps == null || steps.isEmpty()) {
+                        Toast.makeText(getContext(), "Không tìm thấy lộ trình cho loại da này", Toast.LENGTH_LONG).show();
+                    } else {
+                        stepAdapter = new StepAdapter(steps);
+                        rvStepList.setAdapter(stepAdapter);
+                    }
+
                 } else {
                     stepAdapter.notifyDataSetChanged();
                 }

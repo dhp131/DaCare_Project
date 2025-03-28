@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 SharedPreferencesUtil.saveAccessToken(loginResponse.getAccess_token());
                 if (loginResponse.getData().getSkinType() != null){
-                    SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType().getType());
+                    SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType().getId());
                     SharedPreferencesUtil.put("SkinTypeName", loginResponse.getData().getSkinType().getType());
                 }
                 APIClient.getClientToken(loginResponse.getAccess_token());
