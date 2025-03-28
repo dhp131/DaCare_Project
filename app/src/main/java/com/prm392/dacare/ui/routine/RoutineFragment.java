@@ -47,9 +47,10 @@ public class RoutineFragment extends Fragment {
 //            skinType = (SkinType) getArguments().getSerializable("skinType");
 //        }
         String skinTypeId = SharedPreferencesUtil.get("SkinType");
+        String skinTypeName = SharedPreferencesUtil.get("SkinTypeName");
 
         if (!skinTypeId.isEmpty()) {
-            //tvTitle.setText("Loại da của bạn là: " + skinType.getType());
+            tvTitle.setText("Loại da của bạn là: " + skinTypeName);
             routineViewModel.getRoutineBySkinType(skinTypeId);
         } else {
             tvTitle.setText("Không có thông tin loại da.");

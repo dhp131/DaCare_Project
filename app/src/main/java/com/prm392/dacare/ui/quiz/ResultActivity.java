@@ -35,6 +35,7 @@ public class ResultActivity extends AppCompatActivity {
         if (skinType != null) {
             Log.i(TAG, "SkinType received: " + skinType.getType());
             SharedPreferencesUtil.put("SkinType", skinType.getId());
+            SharedPreferencesUtil.put("SkinTypeName", skinType.getType());
             resultTextView.setText("Your skin type: " + skinType.getType() + "\n\n" +
                     "Description: " + skinType.getDescription() + "\n\n" +
                     "Treatment: " + skinType.getTreatment());
