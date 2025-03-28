@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.prm392.dacare.MainActivity;
 import com.prm392.dacare.R;
+import com.prm392.dacare.service.APIClient;
 import com.prm392.dacare.utils.SharedPreferencesUtil;
 import com.prm392.dacare.viewmodel.AuthViewModel;
 
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (!loginResponse.getData().getSkinType().getId().isEmpty()){
                     SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType().getId());
                 }
+                APIClient.getClientToken(loginResponse.getAccess_token());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

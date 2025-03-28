@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment {
                 adapter.submitList(products);
             } else {
                 progressBar.setVisibility(View.VISIBLE);
-                viewModel.retryFetchWithDebounce();
             }
 
         });

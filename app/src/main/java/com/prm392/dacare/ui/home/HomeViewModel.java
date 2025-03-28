@@ -21,9 +21,6 @@ public class HomeViewModel extends ViewModel {
     private Executor executor;
     private LiveData<PagedList<Product>> productLiveData;
     private ProductDataFactory feedDataFactory;
-    private MutableLiveData<ProductPagingSource> dataSourceLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> shouldRetry = new MutableLiveData<>(false);
-    private Handler debounceHandler = new Handler(Looper.getMainLooper());
 
     public HomeViewModel() {
         init();
@@ -46,14 +43,5 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<PagedList<Product>> getProductLiveData() {
         return productLiveData;
-    }
-
-    public void retryFetchWithDebounce() {
-        debounceHandler.removeCallbacksAndMessages(null);
-        debounceHandler.postDelayed(() -> {
-            if (dataSourceLiveData.getValue() != null) {
-                dataSourceLiveData.getValue().invalidate(); // Invalidate DataSource để reload
-            }
-        }, 1000);
     }
 }

@@ -25,4 +25,17 @@ public class APIClient {
         }
         return retrofit;
     }
+
+    public static Retrofit getClientToken(String token) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new APIInterceptor(token))
+                .build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        return retrofit;
+    }
 }
