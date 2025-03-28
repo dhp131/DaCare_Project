@@ -53,13 +53,13 @@ public class ProductInOrderAdapter extends RecyclerView.Adapter<ProductInOrderAd
         // Set product name
         holder.tvProductName.setText(product.getName());
 
-        double finalProductPrice = product.getPrice();
-        String priceText = "Price: " + String.format("%,d", product.getPrice()) + " VND";
+        int finalProductPrice = product.getPrice() - (product.getPrice() * product.getProductDiscount() / 100);;
+        String priceText = "Price: " + String.format("%,d", finalProductPrice) + " VND" + " (Đã bao gồm giảm giá)";
         holder.tvProductPrice.setText(priceText);
 
         // Hide quantity and discount since they're not in Product class
-        holder.tvProductQuantity.setVisibility(View.GONE);
-        holder.tvProductDiscount.setVisibility(View.GONE);
+        holder.tvProductQuantity.setText(product.getQuantity() + " pcs");
+        holder.tvProductDiscount.setText(product.getProductDiscount() + "%");
 
         // Load product image using Picasso
         if (product.getImage() != null && !product.getImage().isEmpty()) {
