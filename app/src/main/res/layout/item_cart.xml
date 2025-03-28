@@ -51,9 +51,9 @@
             <!-- Minus Button -->
             <Button
                 android:id="@+id/buttonMinus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:text="-" />
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="-"/>
 
             <!-- Quantity TextView -->
             <TextView
@@ -67,9 +67,10 @@
             <!-- Plus Button -->
             <Button
                 android:id="@+id/buttonPlus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
                 android:text="+"
+                android:textColor="@color/white"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>

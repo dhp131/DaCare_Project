@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <!-- RecyclerView for cart items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_width="382dp"
+        android:layout_height="545dp"
+        android:layout_weight="1" />
 
     <!-- Bottom bar for Total Price and Order Button -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="50dp"
         android:background="@android:color/darker_gray"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <!-- Total Price TextView -->
         <TextView
@@ -29,15 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Total: $0.00"
-            android:textSize="18sp"
             android:textColor="@android:color/black"
-            android:paddingEnd="8dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!-- Order Button -->
         <Button
             android:id="@+id/buttonOrder"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Order"
             android:textSize="16sp" />
     </LinearLayout>
