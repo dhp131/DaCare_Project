@@ -16,19 +16,21 @@ import android.widget.Button;
 
 import com.prm392.dacare.R;
 import com.prm392.dacare.ui.LoginActivity;
+import com.prm392.dacare.ui.order.ListOrderActivity;
 import com.prm392.dacare.utils.SharedPreferencesUtil;
 
 public class UserFragment extends Fragment {
 
     private UserViewModel mViewModel;
-    private Button btnLogout;
+    private Button btnLogout, btnOrderList;
 
     public static UserFragment newInstance() {
         return new UserFragment();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
@@ -37,7 +39,8 @@ public class UserFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        // TODO: Use the ViewModel
+
+        // Find and set listener for Logout button
         btnLogout = getView().findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +51,14 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btnOrderList = getView().findViewById(R.id.btnOrderList);
+        btnOrderList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Launch ListOrderActivity
+                Intent intent = new Intent(getActivity(), ListOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
 }

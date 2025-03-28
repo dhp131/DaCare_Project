@@ -1,14 +1,10 @@
 package com.prm392.dacare.service;
 
-import com.prm392.dacare.model.Order;
 import com.prm392.dacare.model.Product;
-import com.prm392.dacare.model.User;
 import com.prm392.dacare.payload.request.LoginRequest;
 import com.prm392.dacare.payload.response.LoginResponse;
-import com.prm392.dacare.payload.response.OrderResponse;
+import com.prm392.dacare.payload.response.OrderResponse.OrderResponse;
 import com.prm392.dacare.payload.response.PaginationResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,6 +26,6 @@ public interface APIService {
     @GET("product/{id}")
     Call<Product> getProductById(@Path("id") String id);
 
-    @GET("order")
+    @GET("order/getOrderByStatus")
     Call<OrderResponse> getOrder();
 }

@@ -1,7 +1,6 @@
 package com.prm392.dacare.repository;
 
-import com.prm392.dacare.model.Order;
-import com.prm392.dacare.payload.response.OrderResponse;
+import com.prm392.dacare.payload.response.OrderResponse.OrderResponse;
 import com.prm392.dacare.service.APIClient;
 import com.prm392.dacare.service.APIService;
 

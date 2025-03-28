@@ -27,7 +27,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the item_order.xml layout for each order
+        // Inflate the card layout (item_order.xml)
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new OrderViewHolder(view);
     }
@@ -62,34 +62,43 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public void bind(Order order) {
             // Set order ID
-            txtOrderId.setText("Order #" + order.getId());
+            txtOrderId.setText("#" + order.get_id());
 
             // Format and set the order date
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             txtOrderDate.setText(sdf.format(order.getOrderDate()));
 
-            // Set customer name (assuming getCustomer() returns a User object with getName())
-            txtCustomer.setText(order.getCustomer().getName());
+            // Set customer name (assumes that order.getCustomer() is populated)
+            if (order.getCustomerId() != null) {
+                txtCustomer.setText(order.getCustomerId());
+            } else {
+                txtCustomer.setText("Unknown Customer");
+            }
 
             // Set order status
             txtStatus.setText(order.getStatus());
 
-            // Format and set the order amount (assuming amount is an integer)
+            // Format and set the order amount as currency
             txtAmount.setText(String.format(Locale.getDefault(), "%,d VND", order.getAmount()));
 
-            // Set payment status
+            // Set payment status based on isPaid flag
             txtPaymentStatus.setText(order.isPaid() ? "Paid" : "Unpaid");
 
-            // Display cancel reason if order is cancelled and a reason exists
-            if (order.getStatus().equalsIgnoreCase("Cancelled") && order.getReasonCancel() != null) {
+            // Display cancel reason if status is "Cancel" and reasonCancel exists
+            if ("Cancel".equalsIgnoreCase(order.getStatus()) && order.getReasonCancel() != null) {
                 txtCancelReason.setVisibility(View.VISIBLE);
                 txtCancelReason.setText("Reason: " + order.getReasonCancel());
             } else {
                 txtCancelReason.setVisibility(View.GONE);
             }
 
-            // If you have a URL or resource for customer avatar, load it here (e.g., with Picasso)
-            // Example: Picasso.get().load(order.getCustomer().getAvatarUrl()).into(imgCustomer);
+            // Optionally, load an image for the customer into imgCustomer using a library (Picasso/Glide)
         }
+    }
+
+    // Method to update orders dynamically
+    public void updateOrders(List<Order> orders) {
+        this.orderList = orders;
+        notifyDataSetChanged();
     }
 }

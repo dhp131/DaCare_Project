@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    private String id;
-    private User customer;
+    private String _id;
+    private String customerId;
     private int amount;
     private String status;
     private List<Product> products;
