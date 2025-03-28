@@ -22,11 +22,13 @@ import com.prm392.dacare.ui.home.productdetail.addtocart.AddToCartDialog;
 import com.prm392.dacare.viewmodel.ProductDetailViewModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ProductDetailViewModel viewModel;
     private ImageView productImage;
-    private TextView productName, productBrand, productDescription, productPrice, productRating, productOrigin;
+    private TextView productName, productBrand, productDescription, productPrice, productRating, productOrigin, productPriceOrigin;
     private TextView productIngredients, productUsage, productVolume, productCategory, productDiscount;
     private TextView productInventory, productUsageTime, productExpiredDate, productCreatedAt;
     private Button btnBuyNow;
@@ -68,6 +70,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         productBrand = findViewById(R.id.productBrand);
         productDescription = findViewById(R.id.productDescription);
         productPrice = findViewById(R.id.productPrice);
+        productPriceOrigin = findViewById(R.id.productPriceOrigin);
+        productPriceOrigin.setPaintFlags(android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
         productRating = findViewById(R.id.productRating);
         productOrigin = findViewById(R.id.productOrigin);
 //        productIngredients = findViewById(R.id.productIngredients);
@@ -94,9 +98,16 @@ public class ProductDetailActivity extends AppCompatActivity {
             productName.setText(product.getName());
             productBrand.setText(product.getBrand());
             productDescription.setText(product.getDescription());
-            productPrice.setText("Price: $" + product.getPrice());
-            productRating.setText("Rating: " + Math.round(product.getRating() * 100.0) / 100.0  + "★");
-            productOrigin.setText("Origin: " + product.getOrigin());
+            if (product.getProductDiscount() >0) {
+                int finalPrice = product.getPrice() - (product.getPrice() * product.getProductDiscount() / 100);
+                productPrice.setText(String.format(Locale.getDefault(), "%,d VND", finalPrice));
+                productPriceOrigin.setText(String.format(Locale.getDefault(), "%,d VND", product.getPrice()));
+            } else {
+                productPrice.setText(String.format(Locale.getDefault(), "%,d VND", product.getPrice()));
+                productPriceOrigin.setVisibility(View.GONE);
+            }
+            productRating.setText("Đánh giá: " + Math.round(product.getRating() * 100.0) / 100.0  + "★");
+            productOrigin.setText("Xuất xứ: " + product.getOrigin());
 //            productIngredients.setText("Ingredients: " + product.getIngredients());
 //            productUsage.setText("Usage: " + product.getUsage());
 //            productVolume.setText("Volume: " + product.getVolume() + "ml");

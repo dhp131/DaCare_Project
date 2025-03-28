@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_product_detail"
+    android:layout_margin="16dp"
     android:padding="16dp">
 
     <LinearLayout
@@ -32,11 +33,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView android:id="@+id/productPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@android:color/holo_red_dark" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="price"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/productPriceOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="price"
+                android:textColor="#808080"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <TextView android:id="@+id/productRating"
             android:layout_width="wrap_content"
@@ -49,7 +67,7 @@
         <Button android:id="@+id/btnBuyNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buy Now"
+            android:text="Thêm vào giả hàng"
             android:backgroundTint="@android:color/holo_blue_light"/>
     </LinearLayout>
 </ScrollView>
