@@ -12,11 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Routine {
-    private String id;
+    private String _id;
     private String routineName;
     private String routineDescription;
-    private List<Step> steps;  // Đây là danh sách các bước trong routine
-
-    public List<Step> getSteps() {return steps;}
+    private List<Step> steps;
 
 }

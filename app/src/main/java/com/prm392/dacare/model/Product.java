@@ -28,8 +28,8 @@ public class Product implements Parcelable {
     private String usage;
     private int price;
     private int productDiscount;
-    private Category category;
-    private List<SkinType> skinTypeId;
+    //private Category category;
+    //private List<SkinType> skinTypeId;
     private String usageTime;
     private String origin;
     private String volume;

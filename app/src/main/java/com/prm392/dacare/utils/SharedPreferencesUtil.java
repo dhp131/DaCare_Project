@@ -26,7 +26,15 @@ public class SharedPreferencesUtil {
         sharedPreferences.edit().remove(KEY_ACCESS_TOKEN).apply();
     }
 
+    public static void clear() {
+        sharedPreferences.edit().clear().apply();
+    }
+
     public static void put(String key, String value) {
         sharedPreferences.edit().putString(key,value).apply();
+    }
+
+    public static String get(String key) {
+        return sharedPreferences.getString(key, null);
     }
 }
