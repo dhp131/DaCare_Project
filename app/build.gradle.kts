@@ -66,5 +66,8 @@ dependencies {
     implementation(libs.rxandroid)
 
     implementation(libs.picasso)
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
 }

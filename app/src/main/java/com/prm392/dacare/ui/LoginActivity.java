@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.prm392.dacare.MainActivity;
 import com.prm392.dacare.R;
+import com.prm392.dacare.service.APIClient;
 import com.prm392.dacare.utils.SharedPreferencesUtil;
 import com.prm392.dacare.viewmodel.AuthViewModel;
 
@@ -60,6 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                 tvResult.setText("Đăng nhập thành công!\nTên: " + loginResponse.getData().getName());
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 SharedPreferencesUtil.saveAccessToken(loginResponse.getAccess_token());
+                if (loginResponse.getData().getSkinType() != null){
+                    SharedPreferencesUtil.put("SkinType", loginResponse.getData().getSkinType().getId());
+                    SharedPreferencesUtil.put("SkinTypeName", loginResponse.getData().getSkinType().getType());
+                }
+                APIClient.getClientToken(loginResponse.getAccess_token());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
